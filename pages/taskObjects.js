@@ -6,7 +6,7 @@ class TaskObjects {
   }
 
   async getHomePage() {
-    await this.page.goto(baseURL);
+    await this.page.goto(baseURL, { waitUntil: "domcontentloaded" });
     return this;
   }
 
@@ -14,29 +14,41 @@ class TaskObjects {
     return this.page.locator('(//level[contains(.,"Flying From")])[1]');
   }
 
-  getFlyingFromInputField(){
-    return this.page.locator('(//input[@placeholder="Leaving From"])[2]').fill('Chattogram');
+  getFlyingFromInputField() {
+    return this.page
+      .locator('(//input[@placeholder="Leaving From"])[2]')
+      .fill("Chattogram");
   }
 
-  getResultSpan(){
-    return this.page.locator('(//body//div//div[@role="tabpanel"]//div//div//div//div[1]//div[1]//div[1]//div[1]//div[2]//div[2]//div[1]//span[1]').click();
+  getResultSpan() {
+    return this.page.locator('span:has-text("Chattogram")');
   }
 
-  getFlyingTo(){
+  getFlyingTo() {
     return this.page.locator('(//level[contains(.,"Flying To")])[1]');
   }
 
   getFlyingToInputField() {
-    return this.page.locator('(//input[@placeholder="Arrival To"])[2]').fill('Dhaka');
+    return this.page
+      .locator('(//input[@placeholder="Arrival To"])[2]')
+      .fill("Dhaka");
   }
 
-  getFlyingToResultSpan(){
-    return this.page.locator('//body//div//div[@role="tabpanel"]//div//div//div//div[1]//div[1]//div[2]//div[1]//div[2]//div[2]//div[1]//span[1]').click();
+  getFlyingToResultSpan() {
+    return this.page.locator('//div[@id="one-tab-pane"]//div[2]//div[1]//div[2]//div[2]//div[1]//span[1]');
   }
 
-  getBookingPage() {
-    return `${this.baseURL}/booking`;
+  getDatePicker() {
+    return this.page.locator('(//input[@class = "" and @type = "text"])[1]');
+  }
+
+  getTravelerAndClass() {
+    return this.page.locator('(//level[contains(.,"Traveler, Class")])[1]');
+  }
+
+  getSelectClass(){
+    return this.page.getByRole('button', { name: 'Premium Economy' });
   }
 }
 
-module.exports =  TaskObjects;
+module.exports = TaskObjects;
