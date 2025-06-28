@@ -34,10 +34,10 @@ In the project root directory -
 - Type `npx playwright test`
 - It will run all the tests in the command line
 - You should be able to see the following information on the terminal when all the tests are successfully passed
-![My Image](My Image/CMD1.png)
+![My Image](Resources/CMD1.png)
 - It should generate a build-in HTML report. To generate, run -
 And it should be something like that
-![My Image](My Image/CMD2.png)
+![My Image](Resources/CMD2.png)
 - Type `npx playwright test --headed` if you want to run the tests using browser / UI mode.
 - Run `npx playwright show-report` to check the test status 
 
