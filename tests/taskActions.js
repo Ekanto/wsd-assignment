@@ -30,34 +30,27 @@ class TaskActions {
     await this.pageObjects.getFlyingToResultSpan().click(); // Wait for 2 seconds to ensure the selection is processed
   }
 
-  // In your selectDepartureDate method
 async selectDepartureDate() {
   console.log("Selecting Departure Date");
   await this.page.waitForTimeout(2000);
 
-  // Click the date picker to open it
   await this.pageObjects.getDatePicker().click();
   
-  // Wait for the date picker to be visible
   await this.page.waitForTimeout(500);
   
-  // Define the target month we're looking for
   const targetMonth = "SEPTEMBER 2025";
   
-  // Get the current month text
   let currentMonthText = await this.page.locator('(//span[@class="react-datepicker__current-month"])[1]').innerText();
   console.log(`Current month in date picker: ${currentMonthText}`);
   
-  // Keep clicking next until we find September 2025
   let attempts = 0;
-  const maxAttempts = 24; // Prevent infinite loop
+  const maxAttempts = 24; 
   
   while (!currentMonthText.includes(targetMonth) && attempts < maxAttempts) {
     console.log(`Clicking next month button, currently at: ${currentMonthText}`);
     await this.pageObjects.getNextDatePicker().click();
     await this.page.waitForTimeout(300);
     
-    // Get the updated month text
     currentMonthText = await this.page.locator('(//span[@class="react-datepicker__current-month"])[1]').innerText();
     attempts++;
   }
@@ -69,12 +62,10 @@ async selectDepartureDate() {
   
   console.log(`Found ${targetMonth}, now selecting the 25th`);
   
-  // Now that we're in September 2025, click on the 25th
   await this.pageObjects.getDesiredDate().click();
   
   await this.page.waitForTimeout(1000);
   
-  // Verify the selection worked
   const selectedDate = await this.pageObjects.getDatePicker().inputValue();
   console.log(`Selected date: ${selectedDate}`);
   
