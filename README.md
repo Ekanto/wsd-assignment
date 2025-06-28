@@ -33,11 +33,9 @@ In the project root directory -
 **Using the command line -**
 - Type `npx playwright test`
 - It will run all the tests in the command line
-- You should be able to see the following information when all the tests are successfully passed
+- You should be able to see the following information on the terminal when all the tests are successfully passed
 ![My Image](Resources/CMD1.png)
 - It should generate a build-in HTML report. To generate, run -
-  ```
-  allure open ./allure-report
 And it should be something like that
 ![My Image](Resources/CMD2.png)
 - Type `npx playwright test --headed` if you want to run the tests using browser / UI mode.
