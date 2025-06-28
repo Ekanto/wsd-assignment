@@ -24,7 +24,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  //reporter: [["html"]],
+  reporter: [["html"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -35,18 +35,28 @@ export default defineConfig({
     
     /* Launch options to maximize browser window */
     launchOptions: {
-      args: ['--start-maximized']
+      args: ['--start-maximized'] // Remove this line
     },
     /* Set viewport dimensions */
     viewport: { width: 1920, height: 1080 },
     headless: false, // Set to false if you want to see the browser during tests
+
+    // Add screenshot on failure
+    screenshot: 'only-on-failure',
+    
+    // Ensure page loads completely
+    navigationTimeout: 30000,
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+        // Override the device's default viewport
+        viewport: { width: 1920, height: 1080 },
+      },
     },
 
     // {
